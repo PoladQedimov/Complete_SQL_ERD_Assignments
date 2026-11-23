@@ -1,0 +1,43 @@
+erDiagram
+    Customers ||--o{ Orders : "places"
+    Products ||--o{ Orders : "appears in"
+    Employees ||--o{ Orders : "handles"
+    Employees o|--o{ Employees : "manages (optional)"
+
+    Customers {
+      INTEGER CustomerID PK
+      VARCHAR(50) FirstName
+      VARCHAR(50) LastName
+      VARCHAR(50) Country
+      INTEGER Score
+    }
+    Products {
+      INTEGER ProductID PK
+      VARCHAR(100) Product
+      VARCHAR(50) Category
+      DECIMAL(10_2) Price
+    }
+    Employees {
+      INTEGER EmployeeID PK
+      VARCHAR(50) FirstName
+      VARCHAR(50) LastName
+      VARCHAR(50) Department
+      DATE BirthDate
+      VARCHAR(10) Gender
+      DECIMAL(10_2) Salary
+      INTEGER ManagerID FK
+    }
+    Orders {
+      INTEGER OrderID PK
+      INTEGER ProductID FK
+      INTEGER CustomerID FK
+      INTEGER SalesPersonID FK
+      DATE OrderDate
+      DATE ShipDate
+      VARCHAR(30) OrderStatus
+      VARCHAR(150) ShipAddress
+      VARCHAR(150) BillAddress
+      INTEGER Quantity
+      DECIMAL(10_2) Sales
+      DATETIME CreationTime
+    }

@@ -1,0 +1,58 @@
+digraph ERD_A {
+  graph [rankdir=LR, bgcolor=white, pad=0.45, nodesep=0.7, ranksep=1.2,
+         fontname="DejaVu Sans", label="PROJECT A - SALES MANAGEMENT DATABASE\nPK = Primary Key   |   FK = Foreign Key",
+         labelloc=t, fontsize=22, fontcolor="#163c55"];
+  node [shape=plain, fontname="DejaVu Sans"];
+  edge [color="#456b86", penwidth=1.9, fontname="DejaVu Sans", fontsize=11, fontcolor="#163c55", arrowsize=0.8];
+
+  Customers [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+    <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Customers</B></FONT></TD></TR>
+    <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>CustomerID</B> : INTEGER</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">FirstName : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">LastName : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Country : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Score : INTEGER</TD></TR>
+    </TABLE>>];
+  Products [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+    <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Products</B></FONT></TD></TR>
+    <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>ProductID</B> : INTEGER</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Product : VARCHAR(100)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Category : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Price : DECIMAL(10,2)</TD></TR>
+    </TABLE>>];
+  Employees [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+    <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Employees</B></FONT></TD></TR>
+    <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>EmployeeID</B> : INTEGER</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">FirstName : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">LastName : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Department : VARCHAR(50)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">BirthDate : DATE</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Gender : VARCHAR(10)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Salary : DECIMAL(10,2)</TD></TR>
+    <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">ManagerID : INTEGER (NULL OK)</TD></TR>
+    </TABLE>>];
+  Orders [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+    <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Orders</B></FONT></TD></TR>
+    <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>OrderID</B> : INTEGER</TD></TR>
+    <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">ProductID : INTEGER</TD></TR>
+    <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">CustomerID : INTEGER</TD></TR>
+    <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">SalesPersonID : INTEGER</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">OrderDate : DATE</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">ShipDate : DATE (NULL OK)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">OrderStatus : VARCHAR(30)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">ShipAddress : VARCHAR(150)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">BillAddress : VARCHAR(150)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Quantity : INTEGER</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">Sales : DECIMAL(10,2)</TD></TR>
+    <TR><TD></TD><TD ALIGN="LEFT">CreationTime : DATETIME</TD></TR>
+    </TABLE>>];
+
+  Customers -> Orders [label="1 to 0..N\nCustomerID", color="#488b77"];
+  Products -> Orders [label="1 to 0..N\nProductID", color="#488b77"];
+  Employees -> Orders [label="1 to 0..N\nSalesPersonID", color="#488b77"];
+  Employees -> Employees [label="0..1 manager to 0..N staff\nManagerID", color="#c88b38", constraint=false, tailport=n, headport=s];
+}

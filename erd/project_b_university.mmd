@@ -1,0 +1,37 @@
+erDiagram
+    Instructors ||--o{ Courses : "teaches"
+    Students ||--o{ Enrollments : "registers"
+    Courses ||--o{ Enrollments : "has"
+
+    Students {
+      INT StudentID PK
+      VARCHAR(50) FirstName
+      VARCHAR(50) LastName
+      VARCHAR(100) Email
+      DATE BirthDate
+      VARCHAR(100) Faculty
+      INT EnrollmentYear
+    }
+    Instructors {
+      INT InstructorID PK
+      VARCHAR(50) FirstName
+      VARCHAR(50) LastName
+      VARCHAR(100) Department
+      VARCHAR(100) Email
+      DECIMAL(10_2) Salary
+    }
+    Courses {
+      INT CourseID PK
+      VARCHAR(100) CourseName
+      INT Credits
+      VARCHAR(20) Semester
+      INT InstructorID FK
+    }
+    Enrollments {
+      INT EnrollmentID PK
+      INT StudentID FK
+      INT CourseID FK
+      DATE EnrollmentDate
+      DECIMAL(5_2) Grade
+      VARCHAR(20) Status
+    }

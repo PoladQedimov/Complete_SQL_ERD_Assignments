@@ -1,0 +1,50 @@
+digraph ERD_B {
+ graph [rankdir=LR, bgcolor=white, pad=0.5, nodesep=0.85, ranksep=1.25, fontname="DejaVu Sans", labelloc=t,
+        label="PROJECT B - UNIVERSITY COURSE REGISTRATION\nPK = Primary Key   |   FK = Foreign Key   |   UNIQUE (StudentID, CourseID)", fontsize=22, fontcolor="#163c55"];
+ node [shape=plain, fontname="DejaVu Sans"];
+ edge [color="#456b86", penwidth=1.9, fontname="DejaVu Sans", fontsize=11, fontcolor="#163c55", arrowsize=0.8];
+ Students [label=<
+  <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+  <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Students</B></FONT></TD></TR>
+  <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>StudentID</B> : INT</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">FirstName : VARCHAR(50)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">LastName : VARCHAR(50)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Email : VARCHAR(100)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">BirthDate : DATE</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Faculty : VARCHAR(100)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">EnrollmentYear : INT</TD></TR>
+  </TABLE>>];
+ Instructors [label=<
+  <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+  <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Instructors</B></FONT></TD></TR>
+  <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>InstructorID</B> : INT</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">FirstName : VARCHAR(50)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">LastName : VARCHAR(50)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Department : VARCHAR(100)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Email : VARCHAR(100)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Salary : DECIMAL(10,2)</TD></TR>
+  </TABLE>>];
+ Courses [label=<
+  <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+  <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Courses</B></FONT></TD></TR>
+  <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>CourseID</B> : INT</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">CourseName : VARCHAR(100)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Credits : INT</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Semester : VARCHAR(20)</TD></TR>
+  <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">InstructorID : INT</TD></TR>
+  </TABLE>>];
+ Enrollments [label=<
+  <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" COLOR="#486983" CELLPADDING="7">
+  <TR><TD BGCOLOR="#173f5c" COLSPAN="2"><FONT COLOR="white" POINT-SIZE="17"><B>Enrollments</B></FONT></TD></TR>
+  <TR><TD BGCOLOR="#e9f6ef">PK</TD><TD ALIGN="LEFT"><B>EnrollmentID</B> : INT</TD></TR>
+  <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">StudentID : INT</TD></TR>
+  <TR><TD BGCOLOR="#fff3d7">FK</TD><TD ALIGN="LEFT">CourseID : INT</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">EnrollmentDate : DATE</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Grade : DECIMAL(5,2)</TD></TR>
+  <TR><TD></TD><TD ALIGN="LEFT">Status : VARCHAR(20)</TD></TR>
+  <TR><TD BGCOLOR="#e9f6ef" COLSPAN="2">UNIQUE (StudentID, CourseID)</TD></TR>
+  </TABLE>>];
+ Instructors -> Courses [label="1 to 0..N\nInstructorID", color="#488b77"];
+ Students -> Enrollments [label="1 to 0..N\nStudentID", color="#488b77"];
+ Courses -> Enrollments [label="1 to 0..N\nCourseID", color="#488b77"];
+}
